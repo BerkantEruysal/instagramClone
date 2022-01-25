@@ -10,7 +10,6 @@ import Authorization from './screens/Authorization';
 
 
 const App =  () => {
-  const [değişkenim , setDeğişkenim] = useState(0)
 
   return (
     <View>

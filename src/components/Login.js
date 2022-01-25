@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   ,
   loginButton: {
     borderRadius: 5,
-    backgroundColor: '#3797EF',
+    backgroundColor: 'rgba(55, 151, 239, 0.5)',
     height: 44,
     justifyContent: 'center',
     alignContent: 'center',
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
   loginWithFacebook : {
     marginTop : 37,
     width : 170,
-    alignSelf : "center"
+    alignSelf : "center",
   },
   loginWithFacebookTxt : {
       color : "#3797EF"
