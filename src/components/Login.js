@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     alignSelf : "center",
   },
   loginWithFacebookTxt : {
-      color : "#3797EF"
-      
+      color : "#3797EF",
+      fontWeight : "bold"
   }
 });

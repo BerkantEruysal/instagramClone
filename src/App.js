@@ -4,7 +4,7 @@ import {
   Text,
   View,
 } from 'react-native';
-import Authorization from './screens/Authorization';
+import Authentication from './screens/Authentication';
 
 
 
@@ -13,8 +13,7 @@ const App =  () => {
 
   return (
     <View>
-     <Authorization></Authorization>
-      
+     <Authentication></Authentication>
     </View>
   );
 };
