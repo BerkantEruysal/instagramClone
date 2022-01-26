@@ -8,6 +8,7 @@ import {
   Image
 } from 'react-native';
 import React from 'react';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 export default function Login() {
   return (
@@ -29,7 +30,7 @@ export default function Login() {
   );
 }
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   container: {
     width: '80%',
     alignSelf: 'center',
