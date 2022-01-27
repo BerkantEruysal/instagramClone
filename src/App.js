@@ -15,7 +15,7 @@ const App =  () => {
 
   return (
     <View>
-     <Authentication></Authentication>
+     <Home></Home>
     </View>
   );
 };
