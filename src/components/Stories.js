@@ -66,9 +66,10 @@ export default function Stories() {
 
 const styles = StyleSheet.create({
   wrapper: {
-    height: (Dimensions.get('window').height * 12.8) / 100,
-    borderBottomColor: 'rgba(38 , 38 , 38 , 0.6)',
-    borderBottomWidth: 0.5,
+    height: (Dimensions.get('window').height * 12.8) / 100 + 5,
+    borderBottomColor: 'rgba(38 , 38 , 38 , 0.2)',
+    borderBottomWidth: 0.3,
     flexDirection: 'row',
+    paddingBottom : 5
   },
 });
