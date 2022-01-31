@@ -5,18 +5,19 @@ import {
   StyleSheet,
   Dimensions,
   ImageBackground,
+  TouchableOpacity,
 } from 'react-native';
 import React from 'react';
 
-export default function Post() {
+export default function Post({props}) {
   return (
     <View style={styles.wrapper}>
       <View style={styles.headerWrapper}>
         <View style={styles.userWrapper}>
           <Image
             style={styles.profileIcon}
-            source={require('../assets/tempProfileIcon.png')}></Image>
-          <Text style={styles.userName}>Name of person</Text>
+            source={props.profileIcon}></Image>
+          <Text style={styles.userName}>{props.userName}</Text>
         </View>
         <View style={styles.threeDotWrapper}>
           <Image
@@ -28,11 +29,49 @@ export default function Post() {
         <Image
           resizeMode="cover"
           resizeMethod="resize"
-          style={styles.postImage(375, 375)}
-          source={require('../assets/examplePostImage.png')}></Image>
+          style={styles.postImage(props.postImageWidth, props.postImageHeight)}
+          source={props.postImage}></Image>
       </View>
-      <View>
-        <Text>footer of post</Text>
+      <View style={styles.info}>
+        <View style={styles.buttonWrapper}>
+          <View style={styles.buttonWrapperLeft}>
+            <TouchableOpacity>
+              <Image
+                style={styles.footerButton}
+                source={require('../assets/heartIcon.png')}></Image>
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <Image
+                style={styles.footerButton}
+                source={require('../assets/commentIcon.png')}></Image>
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <Image
+                style={styles.footerButton}
+                source={require('../assets/shareIcon.png')}></Image>
+            </TouchableOpacity>
+          </View>
+          <TouchableOpacity>
+            <Image
+              style={styles.footerButton}
+              source={require('../assets/bookmarkIcon.png')}></Image>
+          </TouchableOpacity>
+        </View>
+        <Text style={styles.likeCounter}>{props.numberOfLikes} Likes</Text>
+        <View style={styles.postDescription}>
+          <Text>
+            <Text style={styles.userName}>{props.userName} </Text>
+            <Text style={styles.normalText}>{props.postDescription}</Text>
+            <Text>...more</Text>
+          </Text>
+          <View style={styles.addComment}>
+            <Image style={styles.commentProfileIcon} source={props.profileIcon}></Image>
+            <Text>Add comment...</Text>
+          </View>
+          <Text>{props.timePassed} ago</Text>
+          
+         
+        </View>
       </View>
     </View>
   );
@@ -40,8 +79,7 @@ export default function Post() {
 
 const styles = StyleSheet.create({
   wrapper: {
-    height: 500,
-    backgroundColor: 'red',
+    
   },
   headerWrapper: {
     flexDirection: 'row',
@@ -76,8 +114,40 @@ const styles = StyleSheet.create({
     return {
       width: Dimensions.get('window').width,
       height: (Dimensions.get('window').width * heigthOfImage) / widthOfImage,
-
       backgroundColor: 'blue',
     };
   },
+  info : {
+    padding : 13
+  },
+  buttonWrapper: {
+    flexDirection: 'row',
+  },
+  footerButton: {
+    width: 24,
+    height: 24,
+    marginRight: 14,
+  },
+  buttonWrapperLeft: {
+    flexDirection: 'row',
+    flex: 1,
+  },
+  likeCounter : {
+    fontWeight : "bold",
+    color : "#000000",
+    marginTop : 7 
+  },
+  normalText : {
+    color : "#000000"
+  },
+  addComment : {
+    flexDirection : "row",
+    marginTop : 8,
+    marginBottom : 3
+  },
+  commentProfileIcon : {
+    width : 24,
+    height : 24,
+    marginRight : 10
+  }
 });
