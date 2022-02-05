@@ -8,15 +8,17 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React from 'react';
+import { useSelector , useDispatch } from 'react-redux';
+import { likePost } from '../redux/slices/HomePosts';
 
 export default function Post({props}) {
+  const dispatch = useDispatch();
+
   return (
     <View style={styles.wrapper}>
       <View style={styles.headerWrapper}>
         <View style={styles.userWrapper}>
-          <Image
-            style={styles.profileIcon}
-            source={props.profileIcon}></Image>
+          <Image style={styles.profileIcon} source={props.profileIcon}></Image>
           <Text style={styles.userName}>{props.userName}</Text>
         </View>
         <View style={styles.threeDotWrapper}>
@@ -25,7 +27,8 @@ export default function Post({props}) {
             source={require('../assets/threeDot.png')}></Image>
         </View>
       </View>
-      <View>
+      <View
+        style={styles.postImage(props.postImageWidth, props.postImageHeight)}>
         <Image
           resizeMode="cover"
           resizeMethod="resize"
@@ -35,16 +38,25 @@ export default function Post({props}) {
       <View style={styles.info}>
         <View style={styles.buttonWrapper}>
           <View style={styles.buttonWrapperLeft}>
-            <TouchableOpacity>
-              <Image
-                style={styles.footerButton}
-                source={require('../assets/heartIcon.png')}></Image>
+
+            <TouchableOpacity onPress={() => {dispatch(likePost(props))}}>
+              {props.isLiked ? (
+                <Image
+                  style={styles.footerButton}
+                  source={require('../assets/filledHeartIcon.png')}></Image>
+              ) : (
+                <Image
+                  style={styles.footerButton}
+                  source={require('../assets/heartIcon.png')}></Image>
+              )}
             </TouchableOpacity>
+
             <TouchableOpacity>
               <Image
                 style={styles.footerButton}
                 source={require('../assets/commentIcon.png')}></Image>
             </TouchableOpacity>
+            
             <TouchableOpacity>
               <Image
                 style={styles.footerButton}
@@ -65,12 +77,12 @@ export default function Post({props}) {
             <Text>...more</Text>
           </Text>
           <View style={styles.addComment}>
-            <Image style={styles.commentProfileIcon} source={props.profileIcon}></Image>
+            <Image
+              style={styles.commentProfileIcon}
+              source={props.loggedUserProfileIcon}></Image>
             <Text>Add comment...</Text>
           </View>
           <Text>{props.timePassed} ago</Text>
-          
-         
         </View>
       </View>
     </View>
@@ -78,9 +90,7 @@ export default function Post({props}) {
 }
 
 const styles = StyleSheet.create({
-  wrapper: {
-    
-  },
+  wrapper: {},
   headerWrapper: {
     flexDirection: 'row',
     height: 46,
@@ -114,11 +124,10 @@ const styles = StyleSheet.create({
     return {
       width: Dimensions.get('window').width,
       height: (Dimensions.get('window').width * heigthOfImage) / widthOfImage,
-      backgroundColor: 'blue',
     };
   },
-  info : {
-    padding : 13
+  info: {
+    padding: 13,
   },
   buttonWrapper: {
     flexDirection: 'row',
@@ -132,22 +141,22 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flex: 1,
   },
-  likeCounter : {
-    fontWeight : "bold",
-    color : "#000000",
-    marginTop : 7 
+  likeCounter: {
+    fontWeight: 'bold',
+    color: '#000000',
+    marginTop: 7,
   },
-  normalText : {
-    color : "#000000"
+  normalText: {
+    color: '#000000',
   },
-  addComment : {
-    flexDirection : "row",
-    marginTop : 8,
-    marginBottom : 3
+  addComment: {
+    flexDirection: 'row',
+    marginTop: 8,
+    marginBottom: 3,
   },
-  commentProfileIcon : {
-    width : 24,
-    height : 24,
-    marginRight : 10
-  }
+  commentProfileIcon: {
+    width: 24,
+    height: 24,
+    marginRight: 10,
+  },
 });
