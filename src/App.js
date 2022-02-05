@@ -5,14 +5,18 @@ import Store from './redux/Store';
 import {Provider} from 'react-redux';
 import Authentication from './screens/Authentication';
 import Home from './screens/Home';
+import { NavigationContainer } from '@react-navigation/native';
 
 const App = () => {
   return (
-    <View>
+    <NavigationContainer>
+        <View>
       <Provider store={Store}>
         <Home></Home>
       </Provider>
     </View>
+    </NavigationContainer>
+    
   );
 };
 
