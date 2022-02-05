@@ -7,11 +7,10 @@ import Stories from '../components/Stories';
 
 export default function Home() {
   return (
-    <ScrollView>
+    <View>
       <HomeHeader></HomeHeader>
-      <Stories></Stories>
-      <HomeMainContent></HomeMainContent>
+      <HomeMainContent header={() => <Stories></Stories>}></HomeMainContent>
       <Footer></Footer>
-    </ScrollView>
+    </View>
   );
 }

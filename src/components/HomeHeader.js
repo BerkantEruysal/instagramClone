@@ -30,7 +30,7 @@ export default function HomeHeader() {
 const styles = StyleSheet.create({
   wrapper: {
     backgroundColor: 'white',
-    height: 45,
+    height: "6%",
     flexDirection : "row",
     padding: 12,
 
