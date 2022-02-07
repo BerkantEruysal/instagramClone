@@ -2,7 +2,7 @@ import {View, Text, Dimensions, Image, StyleSheet , TouchableOpacity} from 'reac
 import React from 'react';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import Login from '../components/Login';
-export default function Authentication() {
+export default function Authentication(props) {
   return (
     <View style={styles.screen}>
       <View style={styles.logoWrapper}>
@@ -10,7 +10,7 @@ export default function Authentication() {
           source={require('../assets/textLogo.png')}
           style={styles.logo}></Image>
       </View>
-      <Login></Login>
+      <Login navigation={props.navigation}></Login>
       <View style={styles.lineOrWrapper}>
         <View style={styles.lineOr}></View>
         <Text style={styles.lineOrTxt}>OR</Text>

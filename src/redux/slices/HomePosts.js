@@ -46,7 +46,7 @@ const HomePosts = createSlice({
        state[index].isLiked = true;
        state[index].numberOfLikes += 1;
        
-          console.log(state.findIndex((obj) => obj.id == post.payload.id))
+
           
       }
   },

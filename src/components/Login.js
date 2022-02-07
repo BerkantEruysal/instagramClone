@@ -9,8 +9,15 @@ import {
 } from 'react-native';
 import React from 'react';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import { logIn } from '../redux/slices/User';
+import { useDispatch } from 'react-redux';
 
-export default function Login() {
+export default function Login(props) {
+  const dispatch = useDispatch()
+  const logInButtonHandler = () => {
+    dispatch(logIn())
+  
+  }
   return (
     <View style={styles.container}>
       <TextInput
@@ -22,7 +29,7 @@ export default function Login() {
         placeholder="Password"
         placeholderTextColor="rgba(0, 0, 0, 0.2)"></TextInput>
       <TouchableOpacity style={styles.forgotPassword}><Text style={styles.forgotPasswordTxt}> Forgot password ? </Text></TouchableOpacity>
-      <TouchableOpacity title="deneme" style={styles.loginButton}>
+      <TouchableOpacity onPress={() => logInButtonHandler()} title="deneme" style={styles.loginButton}>
         <Text style={styles.loginButtonTxt}>Log in</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.loginWithFacebook} ><Text style={styles.loginWithFacebookTxt}><Image source={require("../assets/facebookLogo.png")} style={{width : 20, height : 20}}></Image>  Log in with Facebook </Text></TouchableOpacity>

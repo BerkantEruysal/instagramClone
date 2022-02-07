@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <View>
       <HomeHeader></HomeHeader>
-      <HomeMainContent header={() => <Stories></Stories>}></HomeMainContent>
+      <HomeMainContent header={Stories}></HomeMainContent>
       <Footer></Footer>
     </View>
   );

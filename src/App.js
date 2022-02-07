@@ -3,20 +3,16 @@ import {View} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import Store from './redux/Store';
 import {Provider} from 'react-redux';
-import Authentication from './screens/Authentication';
-import Home from './screens/Home';
-import { NavigationContainer } from '@react-navigation/native';
+import Navigation from './screens/Navigation';
+
+
+
 
 const App = () => {
   return (
-    <NavigationContainer>
-        <View>
-      <Provider store={Store}>
-        <Home></Home>
-      </Provider>
-    </View>
-    </NavigationContainer>
-    
+    <Provider store={Store}>
+     <Navigation></Navigation>
+    </Provider>
   );
 };
 
