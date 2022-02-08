@@ -5,31 +5,6 @@ import Story from './Story';
 const DATA = [
   {
     image: require('../assets/tempProfileIcon.png'),
-    userName: 'asdasd',
-    isWatched: true,
-  },
-  {
-    image: require('../assets/tempProfileIcon.png'),
-    userName: 'berkant',
-    isWatched: true,
-  },
-  {
-    image: require('../assets/tempProfileIcon.png'),
-    userName: 'asdasd',
-    isWatched: true,
-  },
-  {
-    image: require('../assets/tempProfileIcon.png'),
-    userName: 'berkant',
-    isWatched: true,
-  },
-  {
-    image: require('../assets/tempProfileIcon.png'),
-    userName: 'asdasd',
-    isWatched: true,
-  },
-  {
-    image: require('../assets/tempProfileIcon.png'),
     userName: 'berkant',
     isWatched: false,
   },
@@ -43,6 +18,33 @@ const DATA = [
     userName: 'berkant',
     isWatched: false,
   },
+  {
+    
+    image: require('../assets/tempProfileIcon.png'),
+    userName: 'asdasd',
+    isWatched: false,
+  },
+  {
+    image: require('../assets/tempProfileIcon.png'),
+    userName: 'berkant',
+    isWatched: false,
+  },
+  {
+    image: require('../assets/tempProfileIcon.png'),
+    userName: 'asdasd',
+    isWatched: true,
+  },
+  {
+    image: require('../assets/tempProfileIcon.png'),
+    userName: 'berkant',
+    isWatched: true,
+  },
+  {
+    image: require('../assets/tempProfileIcon.png'),
+    userName: 'asdasd',
+    isWatched: true,
+  }
+  
 ];
 export default function Stories() {
   const renderItem = ({item}) => {

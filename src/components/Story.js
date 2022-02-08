@@ -7,24 +7,14 @@ import {
   Dimensions,
 } from 'react-native';
 import React from 'react';
+import ProfileImage from './ProfileImage';
 
 const screenHeight = Dimensions.get('window').height;
 
 export default function Story(props) {
   return (
     <View style={styles.wrapper}>
-      {!props.isWatched ? (
-        <ImageBackground style={[styles.storyBorderImage , {borderWidth : 1 , borderColor : "#808080" , borderRadius : 100}]}>
-        <Image source={props.image} style={styles.storyImage}></Image>
-        </ImageBackground>
-      ) : (
-        <ImageBackground
-          source={require('../assets/storyBorder.png')}
-          style={styles.storyBorderImage}>
-          <Image source={props.image} style={styles.storyImage}></Image>
-        </ImageBackground>
-      )}
-
+      <ProfileImage size={15} activeStory={true} isStoryWatched={props.isWatched} image={props.image}></ProfileImage>
       <Text style={{alignSelf: 'center'}}>{props.userName} </Text>
     </View>
   );
