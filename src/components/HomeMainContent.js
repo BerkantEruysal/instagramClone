@@ -15,7 +15,7 @@ import Post from './Post';
 export default function HomeMainContent(props) {
   const DATA = useSelector( (state) => state.HomePosts)
   const renderItem = ({item}) => {
-    return <Post props={item}></Post>;
+    return <Post navigation={props.navigation} props={item}></Post>;
   };
   return (
     

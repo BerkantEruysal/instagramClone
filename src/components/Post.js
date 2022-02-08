@@ -12,8 +12,11 @@ import { useSelector , useDispatch } from 'react-redux';
 import { likePost } from '../redux/slices/HomePosts';
 import ProfileImage from './ProfileImage';
 
-export default function Post({props}) {
+export default function Post({navigation , props}) {
   const dispatch = useDispatch();
+  const openCommentScreen = () => {
+    navigation.navigate("Comments")
+  }
 
   return (
     <View style={styles.wrapper}>
@@ -55,7 +58,7 @@ export default function Post({props}) {
               )}
             </TouchableOpacity>
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => openCommentScreen()}>
               <Image
                 style={styles.footerButton}
                 source={require('../assets/commentIcon.png')}></Image>

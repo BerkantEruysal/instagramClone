@@ -5,11 +5,11 @@ import Footer from '../components/Footer';
 import HomeMainContent from '../components/HomeMainContent';
 import Stories from '../components/Stories';
 
-export default function Home() {
+export default function Home({navigation}) {
   return (
     <View>
       <HomeHeader></HomeHeader>
-      <HomeMainContent header={Stories}></HomeMainContent>
+      <HomeMainContent navigation={navigation} header={Stories}></HomeMainContent>
       <Footer></Footer>
     </View>
   );
