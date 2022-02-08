@@ -10,6 +10,7 @@ import {
 import React from 'react';
 import { useSelector , useDispatch } from 'react-redux';
 import { likePost } from '../redux/slices/HomePosts';
+import ProfileImage from './ProfileImage';
 
 export default function Post({props}) {
   const dispatch = useDispatch();
@@ -18,7 +19,10 @@ export default function Post({props}) {
     <View style={styles.wrapper}>
       <View style={styles.headerWrapper}>
         <View style={styles.userWrapper}>
-          <Image style={styles.profileIcon} source={props.profileIcon}></Image>
+          <View style={styles.profileImageWrapper}>
+          <ProfileImage size={7} isStoryWatched={false} activeStory={props.activeStory} isWatched={false} image={props.profileImage}></ProfileImage>
+          </View>
+          
           <Text style={styles.userName}>{props.userName}</Text>
         </View>
         <View style={styles.threeDotWrapper}>
@@ -96,9 +100,7 @@ const styles = StyleSheet.create({
     height: 46,
     paddingHorizontal: 8,
   },
-  profileIcon: {
-    width: 30,
-    height: 30,
+  profileImageWrapper: {
     alignSelf: 'center',
     marginRight: 8,
   },
@@ -115,6 +117,7 @@ const styles = StyleSheet.create({
   userWrapper: {
     flexDirection: 'row',
     flex: 1,
+    alignContent : "center"
   },
   threeDotWrapper: {
     justifyContent: 'center',
