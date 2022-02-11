@@ -10,7 +10,7 @@ export default function Home({navigation}) {
     <View>
       <HomeHeader></HomeHeader>
       <HomeMainContent navigation={navigation} header={Stories}></HomeMainContent>
-      <Footer></Footer>
+      
     </View>
   );
 }
