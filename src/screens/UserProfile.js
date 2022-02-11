@@ -19,11 +19,6 @@ const storyData = [
   {id: 2, image: require('../assets/examplePostImage.png'), name: 'okul'},
   {id: 3, image: require('../assets/examplePostImage.png'), name: 'kedim'},
   {id: 4, image: require('../assets/examplePostImage.png'), name: 'araba'},
-  {id: 0, image: require('../assets/examplePostImage.png'), name: 'story name'},
-  {id: 1, image: require('../assets/examplePostImage.png'), name: 'tatil'},
-  {id: 2, image: require('../assets/examplePostImage.png'), name: 'okul'},
-  {id: 3, image: require('../assets/examplePostImage.png'), name: 'kedim'},
-  {id: 4, image: require('../assets/examplePostImage.png'), name: 'araba'},
 ];
 
 const postData = [
@@ -191,10 +186,10 @@ const postData = [
 export default function UserProfile() {
   const renderMinimizedPosts = data => {
     return (
-      <View style={styles.minimizedPostRow}>
+      <View  style={styles.minimizedPostRow}>
         {data.item.map(post => {
           return (
-            <TouchableOpacity style={styles.minimizedPost}>
+            <TouchableOpacity key={post.id} style={styles.minimizedPost}>
               <Image
                 style={styles.minimizedPostImage}
                 source={post.postImage}></Image>
@@ -267,7 +262,7 @@ export default function UserProfile() {
         style={styles.postList}
         data={postData}
         renderItem={renderMinimizedPosts}></FlatList>
-        <Footer></Footer>
+       
     </View>
   );
 }
@@ -370,6 +365,6 @@ const styles = StyleSheet.create({
     paddingBottom : 1
   },
   postList: {
-    height: '85%',
+    height: '93%',
   },
 });

@@ -22,7 +22,6 @@ export default function HomeMainContent(props) {
     <FlatList
       renderItem={renderItem}
       data={DATA}
-      style={{height : "85%" }}
       ListHeaderComponent={props.header}></FlatList>
   );
 }
