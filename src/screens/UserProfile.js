@@ -1,15 +1,243 @@
-import {View, Text, Image, StyleSheet, TouchableOpacity , ScrollView , Dimensions} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+  Dimensions,
+  FlatList,
+} from 'react-native';
 import React from 'react';
 import UserFollowData from '../components/UserFollowData';
 import ProfileBio from '../components/ProfileBio';
+import Footer from "../components/Footer"
 
-const storyData = [{id : 0 , image : require("../assets/examplePostImage.png"), name : "story name"},
-{id : 1 , image : require("../assets/examplePostImage.png"), name : "tatil"},
-{id : 2 , image : require("../assets/examplePostImage.png"), name : "okul"},
-{id : 3 , image : require("../assets/examplePostImage.png"), name : "kedim"},
-{id : 4 , image : require("../assets/examplePostImage.png"), name : "araba"}]
+const storyData = [
+  {id: 0, image: require('../assets/examplePostImage.png'), name: 'story name'},
+  {id: 1, image: require('../assets/examplePostImage.png'), name: 'tatil'},
+  {id: 2, image: require('../assets/examplePostImage.png'), name: 'okul'},
+  {id: 3, image: require('../assets/examplePostImage.png'), name: 'kedim'},
+  {id: 4, image: require('../assets/examplePostImage.png'), name: 'araba'},
+  {id: 0, image: require('../assets/examplePostImage.png'), name: 'story name'},
+  {id: 1, image: require('../assets/examplePostImage.png'), name: 'tatil'},
+  {id: 2, image: require('../assets/examplePostImage.png'), name: 'okul'},
+  {id: 3, image: require('../assets/examplePostImage.png'), name: 'kedim'},
+  {id: 4, image: require('../assets/examplePostImage.png'), name: 'araba'},
+];
+
+const postData = [
+  [
+    {
+      id: 1,
+      userName: 'berkanteruysall',
+      isLiked: false,
+      profileImage: require('../assets/tempProfileIcon.png'),
+      activeStory: false,
+      postImage: require('../assets/examplePostImage.png'),
+      loggedUserProfileIcon: require('../assets/tempProfileIcon.png'),
+      numberOfLikes: 142,
+      postImageWidth: 375,
+      postImageHeight: 375,
+      timePassed: '10 minutes',
+      postDescription:
+        'Explanation Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt...',
+    },
+    {
+      id: 2,
+      userName: 'sojiner',
+      isLiked: true,
+      profileImage: require('../assets/tempProfileIcon.png'),
+      activeStory: true,
+      postImage: require('../assets/examplePostImage2.png'),
+      loggedUserProfileIcon: require('../assets/tempProfileIcon.png'),
+      postImageWidth: 375,
+      postImageHeight: 468.75,
+      timePassed: '3 hours',
+      numberOfLikes: 56,
+      postDescription:
+        'Explanation Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt...',
+    },
+    {
+      id: 3,
+      userName: 'berkanteruysall',
+      isLiked: false,
+      profileImage: require('../assets/tempProfileIcon.png'),
+      activeStory: false,
+      postImage: require('../assets/examplePostImage.png'),
+      loggedUserProfileIcon: require('../assets/tempProfileIcon.png'),
+      numberOfLikes: 142,
+      postImageWidth: 375,
+      postImageHeight: 375,
+      timePassed: '10 minutes',
+      postDescription:
+        'Explanation Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt...',
+    },
+  ],
+  [
+    {
+      id: 4,
+      userName: 'sojiner',
+      isLiked: true,
+      profileImage: require('../assets/tempProfileIcon.png'),
+      activeStory: true,
+      postImage: require('../assets/examplePostImage2.png'),
+      loggedUserProfileIcon: require('../assets/tempProfileIcon.png'),
+      postImageWidth: 375,
+      postImageHeight: 468.75,
+      timePassed: '3 hours',
+      numberOfLikes: 56,
+      postDescription:
+        'Explanation Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt...',
+    },
+    {
+      id: 5,
+      userName: 'berkanteruysall',
+      isLiked: false,
+      profileImage: require('../assets/tempProfileIcon.png'),
+      activeStory: false,
+      postImage: require('../assets/examplePostImage.png'),
+      loggedUserProfileIcon: require('../assets/tempProfileIcon.png'),
+      numberOfLikes: 142,
+      postImageWidth: 375,
+      postImageHeight: 375,
+      timePassed: '10 minutes',
+      postDescription:
+        'Explanation Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt...',
+    },
+    {
+      id: 6,
+      userName: 'sojiner',
+      isLiked: true,
+      profileImage: require('../assets/tempProfileIcon.png'),
+      activeStory: true,
+      postImage: require('../assets/examplePostImage2.png'),
+      loggedUserProfileIcon: require('../assets/tempProfileIcon.png'),
+      postImageWidth: 375,
+      postImageHeight: 468.75,
+      timePassed: '3 hours',
+      numberOfLikes: 56,
+      postDescription:
+        'Explanation Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt...',
+    },
+  ],
+
+  [
+    {
+      id: 7,
+      userName: 'berkanteruysall',
+      isLiked: false,
+      profileImage: require('../assets/tempProfileIcon.png'),
+      activeStory: false,
+      postImage: require('../assets/examplePostImage.png'),
+      loggedUserProfileIcon: require('../assets/tempProfileIcon.png'),
+      numberOfLikes: 142,
+      postImageWidth: 375,
+      postImageHeight: 375,
+      timePassed: '10 minutes',
+      postDescription:
+        'Explanation Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt...',
+    },
+    {
+      id: 8,
+      userName: 'sojiner',
+      isLiked: true,
+      profileImage: require('../assets/tempProfileIcon.png'),
+      activeStory: true,
+      postImage: require('../assets/examplePostImage2.png'),
+      loggedUserProfileIcon: require('../assets/tempProfileIcon.png'),
+      postImageWidth: 375,
+      postImageHeight: 468.75,
+      timePassed: '3 hours',
+      numberOfLikes: 56,
+      postDescription:
+        'Explanation Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt...',
+    },
+    {
+      id: 9,
+      userName: 'berkanteruysall',
+      isLiked: false,
+      profileImage: require('../assets/tempProfileIcon.png'),
+      activeStory: false,
+      postImage: require('../assets/examplePostImage.png'),
+      loggedUserProfileIcon: require('../assets/tempProfileIcon.png'),
+      numberOfLikes: 142,
+      postImageWidth: 375,
+      postImageHeight: 375,
+      timePassed: '10 minutes',
+      postDescription:
+        'Explanation Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt...',
+    },
+  ],
+  [
+    {
+      id: 10,
+      userName: 'sojiner',
+      isLiked: true,
+      profileImage: require('../assets/tempProfileIcon.png'),
+      activeStory: true,
+      postImage: require('../assets/examplePostImage2.png'),
+      loggedUserProfileIcon: require('../assets/tempProfileIcon.png'),
+      postImageWidth: 375,
+      postImageHeight: 468.75,
+      timePassed: '3 hours',
+      numberOfLikes: 56,
+      postDescription:
+        'Explanation Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt...',
+    },
+  ],
+];
 
 export default function UserProfile() {
+  const renderMinimizedPosts = data => {
+    return (
+      <View style={styles.minimizedPostRow}>
+        {data.item.map(post => {
+          return (
+            <TouchableOpacity style={styles.minimizedPost}>
+              <Image
+                style={styles.minimizedPostImage}
+                source={post.postImage}></Image>
+            </TouchableOpacity>
+          );
+        })}
+      </View>
+    );
+  };
+
+  const HeaderOfPostList = () => {
+    return (
+      <View>
+        <UserFollowData></UserFollowData>
+        <ProfileBio></ProfileBio>
+        <View style={styles.editProfileWrapper}>
+          <TouchableOpacity style={styles.editProfileButton}>
+            <Text style={styles.editProfileText}>Edit Profile</Text>
+          </TouchableOpacity>
+        </View>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          style={styles.storySection}>
+          {storyData.map(data => {
+            return (
+              <TouchableOpacity key={data.id} style={styles.storyWrapper}>
+                <View style={styles.storyImageWrapper}>
+                  <Image style={styles.storyImage} source={data.image}></Image>
+                </View>
+                <Text>{data.name}</Text>
+              </TouchableOpacity>
+            );
+          })}
+        </ScrollView>
+        <View style={styles.gridWrapper}>
+          <Image
+            style={styles.gridIcon}
+            source={require('../assets/grid.png')}></Image>
+        </View>
+      </View>
+    );
+  };
   return (
     <View style={styles.wrapper}>
       <View style={styles.header}>
@@ -33,32 +261,21 @@ export default function UserProfile() {
           </TouchableOpacity>
         </View>
       </View>
-      <UserFollowData></UserFollowData>
-      <ProfileBio></ProfileBio>
-      <View style={styles.editProfileWrapper}>
-        <TouchableOpacity style={styles.editProfileButton}>
-          <Text style={styles.editProfileText}>Edit Profile</Text>
-        </TouchableOpacity>
-      </View>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.storySection}>
-        {storyData.map((data) => {
-          return <TouchableOpacity key={data.id} style={styles.storyWrapper}>
-          <View style={styles.storyImageWrapper}>
-            <Image style={styles.storyImage} source={data.image}></Image>
-          </View>
-          <Text>{data.name}</Text>
-        </TouchableOpacity>
-        })}
-      </ScrollView>
 
+      <FlatList
+        ListHeaderComponent={HeaderOfPostList}
+        style={styles.postList}
+        data={postData}
+        renderItem={renderMinimizedPosts}></FlatList>
+        <Footer></Footer>
     </View>
   );
 }
 
-const ScreenWidth = Dimensions.get("screen").width
-const vw = (size) => {
-  return Dimensions.get("screen").width * size / 100
-}
+const ScreenWidth = Dimensions.get('screen').width;
+const vw = size => {
+  return (Dimensions.get('screen').width * size) / 100;
+};
 
 const styles = StyleSheet.create({
   wrapper: {},
@@ -92,41 +309,67 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     padding: 5,
   },
-  editProfileButton : {
-    borderWidth : 1,
-    borderRadius : 3,
-    borderColor : "#CBCBCB",
-    height : 30,
-    alignItems : "center",
-    justifyContent : "center",
+  editProfileButton: {
+    borderWidth: 1,
+    borderRadius: 3,
+    borderColor: '#CBCBCB',
+    height: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  editProfileWrapper : {
-    paddingHorizontal : 15,
-    marginTop : 10
+  editProfileWrapper: {
+    paddingHorizontal: 15,
+    marginTop: 10,
   },
-  editProfileText : {
-    color : "#000000",
-    fontWeight : "bold"
+  editProfileText: {
+    color: '#000000',
+    fontWeight: 'bold',
   },
-  storySection : {
-    marginTop : 10
+  storySection: {
+    marginTop: 10,
   },
-  storyWrapper : {
-    alignItems :"center",
-    marginHorizontal : 5 
+  storyWrapper: {
+    alignItems: 'center',
+    marginHorizontal: 5,
   },
-  storyImageWrapper : {
-    width : vw(15) + 8,
-    height : vw(15) + 8,
-    borderWidth : 0.8,
-    borderRadius : (vw(15) + 8) / 2,
-    alignItems : "center",
-    justifyContent : "center",
-    borderColor : "rgba( 0 , 0 , 0 , 0.3)"
+  storyImageWrapper: {
+    width: vw(15) + 8,
+    height: vw(15) + 8,
+    borderWidth: 0.8,
+    borderRadius: (vw(15) + 8) / 2,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderColor: 'rgba( 0 , 0 , 0 , 0.3)',
   },
-  storyImage : {
-    width : vw(15),
-    height : vw(15),
-    borderRadius : vw(15) / 2
-  }
+  storyImage: {
+    width: vw(15),
+    height: vw(15),
+    borderRadius: vw(15) / 2,
+  },
+  gridWrapper: {
+    borderBottomWidth: 1,
+    alignItems: 'center',
+    paddingBottom: 10,
+    marginTop: 10,
+  },
+  gridIcon: {
+    width: 17,
+    height: 17,
+  },
+  minimizedPost: {
+    width: vw(33.),
+    height: vw(33.),
+  },
+  minimizedPostImage: {
+    width: '100%',
+    height: '100%',
+  },
+  minimizedPostRow: {
+    flexDirection: 'row',
+    justifyContent : "space-between",
+    paddingBottom : 1
+  },
+  postList: {
+    height: '85%',
+  },
 });
