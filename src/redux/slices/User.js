@@ -5,6 +5,7 @@ const initialState = {
   isLoggedIn: false,
   accessToken: null,
   refreshToken: null,
+  profilePicture: null
 };
 
 const User = createSlice({
@@ -12,9 +13,9 @@ const User = createSlice({
   initialState,
   reducers: {
     setTokens : (state , {payload}) => {
-      state.accessToken = payload.accessToken,
-      state.refreshToken = payload.refreshToken
-      console.log(state)
+      state.accessToken = payload.accessToken
+      state.refreshToken = payload.refreshToke
+      state.isLoggedIn = true
     }
   },
 });

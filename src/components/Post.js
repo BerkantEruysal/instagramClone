@@ -17,16 +17,17 @@ export default function Post({navigation , props}) {
   const openCommentScreen = () => {
     navigation.navigate("Comments")
   }
+  
 
   return (
     <View style={styles.wrapper}>
       <View style={styles.headerWrapper}>
         <View style={styles.userWrapper}>
           <View style={styles.profileImageWrapper}>
-          <ProfileImage size={7} isStoryWatched={false} activeStory={props.activeStory} isWatched={false} image={props.profileImage}></ProfileImage>
+          <ProfileImage size={7} isStoryWatched={false} activeStory={props.user.isAnyStory} isWatched={false} image={{uri : props.user.profilePicture}}></ProfileImage>
           </View>
           
-          <Text style={styles.userName}>{props.userName}</Text>
+          <Text style={styles.userName}>{props.user.username}</Text>
         </View>
         <View style={styles.threeDotWrapper}>
           <Image
@@ -35,12 +36,12 @@ export default function Post({navigation , props}) {
         </View>
       </View>
       <View
-        style={styles.postImage(props.postImageWidth, props.postImageHeight)}>
+        style={styles.postImage(props.ratio)}>
         <Image
           resizeMode="cover"
           resizeMethod="resize"
-          style={styles.postImage(props.postImageWidth, props.postImageHeight)}
-          source={props.postImage}></Image>
+          style={styles.postImage(props.ratio)}
+          source={{uri : props.postImage}}></Image>
       </View>
       <View style={styles.info}>
         <View style={styles.buttonWrapper}>
@@ -76,11 +77,11 @@ export default function Post({navigation , props}) {
               source={require('../assets/bookmarkIcon.png')}></Image>
           </TouchableOpacity>
         </View>
-        <Text style={styles.likeCounter}>{props.numberOfLikes} Likes</Text>
+        <Text style={styles.likeCounter}>{props.likeCount} Likes</Text>
         <View style={styles.postDescription}>
           <Text>
-            <Text style={styles.userName}>{props.userName} </Text>
-            <Text style={styles.normalText}>{props.postDescription}</Text>
+            <Text style={styles.userName}>{props.user.username} </Text>
+            <Text style={styles.normalText}>{props.title}</Text>
             <Text>...more</Text>
           </Text>
           <View style={styles.addComment}>
@@ -89,7 +90,7 @@ export default function Post({navigation , props}) {
               source={props.loggedUserProfileIcon}></Image>
             <Text>Add comment...</Text>
           </View>
-          <Text>{props.timePassed} ago</Text>
+          <Text>{props.createdDate}</Text>
         </View>
       </View>
     </View>
@@ -126,10 +127,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: 10,
   },
-  postImage: (widthOfImage, heigthOfImage) => {
+  postImage: (ratio) => {
     return {
       width: Dimensions.get('window').width,
-      height: (Dimensions.get('window').width * heigthOfImage) / widthOfImage,
+      height: Dimensions.get('window').width / ratio
     };
   },
   info: {

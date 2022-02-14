@@ -7,18 +7,25 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {logIn} from '../api/AuthenticationApi';
 import {useDispatch, useSelector} from 'react-redux';
+
+
+import { getHomePosts } from '../api/PostsApi';
 
 export default function Login(props) {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
 
+  
+
   const logInButtonHandler = () => {
     logIn(dispatch, {userName, password});
+
+  
   };
   return (
     <View style={styles.container}>
