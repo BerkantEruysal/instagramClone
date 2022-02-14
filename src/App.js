@@ -1,17 +1,13 @@
-import React, {useState} from 'react';
-import {View} from 'react-native';
+import React from 'react';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import Store from './redux/Store';
 import {Provider} from 'react-redux';
 import Navigation from './screens/Navigation';
 
-
-
-
 const App = () => {
   return (
     <Provider store={Store}>
-     <Navigation></Navigation>
+      <Navigation></Navigation>
     </Provider>
   );
 };

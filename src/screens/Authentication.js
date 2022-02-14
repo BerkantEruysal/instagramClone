@@ -1,7 +1,15 @@
-import {View, Text, Dimensions, Image, StyleSheet , TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  Dimensions,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
 import React from 'react';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import Login from '../components/Login';
+
 export default function Authentication(props) {
   return (
     <View style={styles.screen}>
@@ -29,16 +37,16 @@ export default function Authentication(props) {
 const styles = EStyleSheet.create({
   screen: {
     paddingHorizontal: 20,
-    height : "100%",
+    height: '100%',
   },
   logoWrapper: {
     alignSelf: 'center',
-    marginTop: Dimensions.get("window").height * 18.1 / 100,
+    marginTop: (Dimensions.get('window').height * 18.1) / 100,
     marginBottom: 20,
   },
   logo: {
     width: 182,
-    height : 49 ,
+    height: 49,
   },
   lineOrWrapper: {
     flexDirection: 'row',

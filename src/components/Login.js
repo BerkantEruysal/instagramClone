@@ -5,34 +5,49 @@ import {
   TextInput,
   StyleSheet,
   TouchableOpacity,
-  Image
+  Image,
 } from 'react-native';
-import React from 'react';
+import React, {useRef, useState} from 'react';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import { logIn } from '../redux/slices/User';
-import { useDispatch } from 'react-redux';
+import {logIn} from '../api/AuthenticationApi';
+import {useDispatch, useSelector} from 'react-redux';
 
 export default function Login(props) {
-  const dispatch = useDispatch()
+  const [userName, setUserName] = useState('');
+  const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
+
   const logInButtonHandler = () => {
-    dispatch(logIn())
-  
-  }
+    logIn(dispatch, {userName, password});
+  };
   return (
     <View style={styles.container}>
       <TextInput
+        onChangeText={value => setUserName(value)}
         style={styles.input}
         placeholder="Username"
         placeholderTextColor="rgba(0, 0, 0, 0.2)"></TextInput>
       <TextInput
+        onChangeText={value => setPassword(value)}
         style={styles.input}
         placeholder="Password"
         placeholderTextColor="rgba(0, 0, 0, 0.2)"></TextInput>
-      <TouchableOpacity style={styles.forgotPassword}><Text style={styles.forgotPasswordTxt}> Forgot password ? </Text></TouchableOpacity>
-      <TouchableOpacity onPress={() => logInButtonHandler()} title="deneme" style={styles.loginButton}>
+      <TouchableOpacity style={styles.forgotPassword}>
+        <Text style={styles.forgotPasswordTxt}> Forgot password ? </Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => logInButtonHandler()}
+        style={styles.loginButton}>
         <Text style={styles.loginButtonTxt}>Log in</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.loginWithFacebook} ><Text style={styles.loginWithFacebookTxt}><Image source={require("../assets/facebookLogo.png")} style={{width : 20, height : 20}}></Image>  Log in with Facebook </Text></TouchableOpacity>
+      <TouchableOpacity style={styles.loginWithFacebook}>
+        <Text style={styles.loginWithFacebookTxt}>
+          <Image
+            source={require('../assets/facebookLogo.png')}
+            style={{width: 20, height: 20}}></Image>{' '}
+          Log in with Facebook{' '}
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -58,14 +73,12 @@ const styles = EStyleSheet.create({
   },
 
   forgotPassword: {
-    
     marginTop: 19,
     marginLeft: '60%',
   },
-  forgotPasswordTxt : {
+  forgotPasswordTxt: {
     color: '#3797EF',
-  }
-  ,
+  },
   loginButton: {
     borderRadius: 5,
     backgroundColor: 'rgba(55, 151, 239, 0.5)',
@@ -76,15 +89,15 @@ const styles = EStyleSheet.create({
   },
   loginButtonTxt: {
     alignSelf: 'center',
-    color : "#FFFFFF"
+    color: '#FFFFFF',
   },
-  loginWithFacebook : {
-    marginTop : 37,
-    width : 170,
-    alignSelf : "center",
+  loginWithFacebook: {
+    marginTop: 37,
+    width: 170,
+    alignSelf: 'center',
   },
-  loginWithFacebookTxt : {
-      color : "#3797EF",
-      fontWeight : "bold"
-  }
+  loginWithFacebookTxt: {
+    color: '#3797EF',
+    fontWeight: 'bold',
+  },
 });

@@ -1,37 +1,42 @@
-import { createSlice } from '@reduxjs/toolkit';
+import {createSlice} from '@reduxjs/toolkit';
 
-const initialState = [{
+const initialState = [
+  {
     userName: 'berkant',
     commentText: 'deneme deneme',
     activeStory: true,
     isStoryWatched: false,
     timePassed: '10d',
     numberOfLikes: 12,
-  } , {
+  },
+  {
+    userName: 'berkant',
+    commentText: 'deneme deneme',
+    activeStory: false,
+    isStoryWatched: false,
+    timePassed: '10d',
+    numberOfLikes: 12,
+  },
+  {
     userName: 'berkant',
     commentText: 'deneme deneme',
     activeStory: true,
     isStoryWatched: false,
     timePassed: '10d',
     numberOfLikes: 12,
-  } , {
+  },
+  {
     userName: 'berkant',
     commentText: 'deneme deneme',
     activeStory: true,
     isStoryWatched: false,
     timePassed: '10d',
     numberOfLikes: 12,
-  } , {
-    userName: 'berkant',
-    commentText: 'deneme deneme',
-    activeStory: true,
-    isStoryWatched: false,
-    timePassed: '10d',
-    numberOfLikes: 12,
-  }];
+  },
+];
 
 const Comments = createSlice({
-  name: "comments",
+  name: 'comments',
   initialState,
   reducers: {},
 });

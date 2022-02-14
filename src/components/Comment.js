@@ -7,7 +7,7 @@ export default function Comment({props}) {
     <View style={styles.wrapper}>
       <View style={styles.ProfileImageWrapper}>
         <ProfileImage
-          activeStory = {false}
+          activeStory = {props.activeStory}
           isStoryWatched = {false}
           size={10}
           image={require('../assets/examplePostImage.png')}></ProfileImage>
@@ -38,6 +38,7 @@ export default function Comment({props}) {
 const styles = StyleSheet.create({
   wrapper: {
     flexDirection : "row",
+    marginBottom : 20
   },
   userName : {
     fontWeight : "bold",
