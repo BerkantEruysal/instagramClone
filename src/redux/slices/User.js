@@ -1,24 +1,24 @@
 import {createSlice} from '@reduxjs/toolkit';
+import {logInApi} from '../../api/AuthenticationApi';
 
 const initialState = {
-    isLoggedIn : false
+  isLoggedIn: false,
+  accessToken: null,
+  refreshToken: null,
 };
 
 const User = createSlice({
-  name: 'User',
+  name: 'user',
   initialState,
   reducers: {
-    logIn: state => {
-        state.isLoggedIn = true
- 
-    },
-    logOut: state => {
-      state.isLoggedIn = false;
- 
-    },
+    setTokens : (state , {payload}) => {
+      state.accessToken = payload.accessToken,
+      state.refreshToken = payload.refreshToken
+      console.log(state)
+    }
   },
 });
 
-export const {logIn , logOut} = User.actions;
+export const {setTokens} = User.actions;
 
 export default User.reducer;
