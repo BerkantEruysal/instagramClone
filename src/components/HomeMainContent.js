@@ -27,9 +27,11 @@ const a = {
 
 export default function HomeMainContent(props) {
   const DATA = useSelector(state => state.HomePosts);
+  const accessToken = useSelector(state => state.User.accessToken)
+  
   const dispatch = useDispatch();
   useEffect(() => {
-    getHomePosts(dispatch , DATA.page);
+    getHomePosts(dispatch , DATA.page , accessToken);
   }, []);
   
 
@@ -40,7 +42,7 @@ export default function HomeMainContent(props) {
   return (
     <FlatList
     onEndReached={() => {
-      getHomePosts(dispatch , DATA.page)
+      getHomePosts(dispatch , DATA.page , accessToken)
      
     }}
       renderItem={renderItem}

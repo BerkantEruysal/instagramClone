@@ -15,20 +15,20 @@ const HomePosts = createSlice({
    
       
     },
-    likePost: (state, post) => {
-      const index = state.findIndex(obj => obj.id == post.payload.id);
-      if (post.payload.isLiked == true) {
-        state[index].isLiked = false;
-        state[index].numberOfLikes -= 1;
+    changeLikeCount : (state, {payload}) => {
+      const index = state.posts.findIndex(obj => obj.unique_id == payload);
+      if (state.posts[index].isLiked == true) {
+        state.posts[index].isLiked = false;
+        state.posts[index].likeCount -= 1;
         return;
       }
-      state[index].isLiked = true;
-      state[index].numberOfLikes += 1;
+      state.posts[index].isLiked = true;
+      state.posts[index].likeCount += 1;
     },
 
   },
 });
 
-export const {likePost, addToPosts} = HomePosts.actions;
+export const {changeLikeCount, addToPosts} = HomePosts.actions;
 
 export default HomePosts.reducer;

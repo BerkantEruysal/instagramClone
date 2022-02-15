@@ -9,13 +9,18 @@ import {
 } from 'react-native';
 import React from 'react';
 import { useSelector , useDispatch } from 'react-redux';
-import { likePost } from '../redux/slices/HomePosts';
+import { likePost } from '../api/PostsApi';
 import ProfileImage from './ProfileImage';
 
 export default function Post({navigation , props}) {
+  const {accessToken} = useSelector(state => state.User)
   const dispatch = useDispatch();
   const openCommentScreen = () => {
+    
     navigation.navigate("Comments")
+  }
+  const likeHandler = () => {
+    likePost(dispatch , props.unique_id , accessToken)
   }
   
 
@@ -47,7 +52,7 @@ export default function Post({navigation , props}) {
         <View style={styles.buttonWrapper}>
           <View style={styles.buttonWrapperLeft}>
 
-            <TouchableOpacity onPress={() => {dispatch(likePost(props))}}>
+            <TouchableOpacity onPress={likeHandler}>
               {props.isLiked ? (
                 <Image
                   style={styles.footerButton}
