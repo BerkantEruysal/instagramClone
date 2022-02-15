@@ -5,23 +5,17 @@ const initialState = {
   isLoggedIn: false,
   accessToken: null,
   refreshToken: null,
+  profilePicture: null
 };
 
 const User = createSlice({
-  name: 'User',
+  name: 'user',
   initialState,
   reducers: {
     setTokens : (state , {payload}) => {
-<<<<<<< Updated upstream
-      state.accessToken = payload.accessToken,
-      state.refreshToken = payload.refreshToken
-      console.log(state)
-=======
       state.accessToken = payload.accessToken
-      state.refreshToken = payload.refreshToken
+      state.refreshToken = payload.refreshToke
       state.isLoggedIn = true
-    
->>>>>>> Stashed changes
     }
   },
 });

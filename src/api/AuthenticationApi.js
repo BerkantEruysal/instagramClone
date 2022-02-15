@@ -1,19 +1,7 @@
-import { setTokens } from "../redux/slices/User";
-/*
+import {setTokens} from '../redux/slices/User';
+import EncryptedStorage from 'react-native-encrypted-storage';
 
-
-  fetch("http://192.168.20.107:8000/api/post/own/" , {headers : {
-    Authorization : "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQ0OTQyNzY5LCJpYXQiOjE2NDQ4NTYzNjksImp0aSI6IjUzNjE2NmJjMmU4ZjQ1YTM4NTI1OWRhYmEyNDk1YTY1IiwidXNlcl9pZCI6Mn0.ZitlVlnJq3hFek-4vhH9dFlD_X9qhqPoElc-FxDH82E"
-  } })
-  .then(response => response.json())
-  .then(data => console.log(data));
-
-*/
-
-
-export const logIn = async (dispatch , {password, userName}) => {
-    
-  console.log("asd")
+export const logIn = async (dispatch, {password, userName}) => {
   let tokens = await fetch('http://192.168.20.107:8000/api/token/', {
     headers: {
       'Content-Type': 'application/json',
@@ -23,9 +11,43 @@ export const logIn = async (dispatch , {password, userName}) => {
       password,
       username: userName,
     }),
-  });
+  })
+ 
   tokens = await tokens.json();
-  dispatch(setTokens({accessToken : tokens.access , refreshToken : tokens.refresh}))
-  
-  
+  dispatch(
+    setTokens({accessToken: tokens.access, refreshToken: tokens.refresh})
+  );
+  setTokensToEncrypetStorage(tokens.access , tokens.refresh)
 };
+
+export const getTokensFromEncryptedStorage = async (dispatch , setIsLoading) => {
+  try {   
+    let session = await EncryptedStorage.getItem("user_session");
+    session = JSON.parse(session)
+    if (session.accessToken !== undefined) {
+      console.log("asd")
+      
+      dispatch(setTokens({accessToken : session.accessToken , refreshToken: session.refresh}))
+        
+    }
+    setIsLoading(false)
+} catch (error) {
+    console.log(error)
+}
+}
+
+export const setTokensToEncrypetStorage = async (access , refresh) => {
+  try {
+    await EncryptedStorage.setItem(
+        "user_session",
+        JSON.stringify({
+            accessToken : access,
+            refreshToken : refresh
+        })
+    );
+
+  
+} catch (error) {
+   
+}
+}

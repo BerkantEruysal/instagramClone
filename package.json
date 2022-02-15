@@ -16,6 +16,7 @@
     "@reduxjs/toolkit": "^1.7.1",
     "react": "17.0.2",
     "react-native": "0.67.0",
+    "react-native-encrypted-storage": "^4.0.2",
     "react-native-extended-stylesheet": "^0.12.0",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.10.2",
