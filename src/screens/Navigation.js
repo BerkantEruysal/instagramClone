@@ -1,5 +1,5 @@
 import { View, Text } from 'react-native';
-import React from 'react';
+import React , {useState} from 'react';
 import Authentication from '../screens/Authentication';
 import Home from '../screens/Home';
 import {NavigationContainer} from '@react-navigation/native';
@@ -9,12 +9,14 @@ import Comments from './Comments';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import UserProfile from './UserProfile';
 import Footer from '../components/Footer';
+import Loading from './Loading';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 export default function Navigation() {
     const {isLoggedIn} = useSelector(state => state.User)
+    const [isLoading , setIsLoading] = useState(true)
 
     const HomeStack = () => {
       return <Tab.Navigator tabBar={ props => <Footer {...props}> </Footer>}>
@@ -23,7 +25,8 @@ export default function Navigation() {
       </Tab.Navigator>
     }
   return (
-    <NavigationContainer >
+    <>
+    {isLoading ? <Loading setIsLoading={setIsLoading}></Loading> : <NavigationContainer >
        {isLoggedIn ? 
        <>
        <Stack.Navigator >
@@ -36,6 +39,8 @@ export default function Navigation() {
          <Stack.Screen name='Authentication' options={{headerShown : false}} component={Authentication}></Stack.Screen>
        </Stack.Navigator>
        </>}
-  </NavigationContainer>
-  );
+  </NavigationContainer> }
+    </>
+  )
+    
 }
