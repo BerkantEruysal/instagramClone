@@ -11,13 +11,14 @@ import React from 'react';
 import { useSelector , useDispatch } from 'react-redux';
 import { likePost } from '../api/PostsApi';
 import ProfileImage from './ProfileImage';
+import { resetCommentState } from '../redux/slices/Comments';
 
 export default function Post({navigation , props}) {
   const {accessToken} = useSelector(state => state.User)
   const dispatch = useDispatch();
   const openCommentScreen = () => {
-    
-    navigation.navigate("Comments")
+    dispatch(resetCommentState())
+    navigation.navigate("Comments" , {postId : props.unique_id})
   }
   const likeHandler = () => {
     likePost(dispatch , props.unique_id , accessToken)
