@@ -21,10 +21,20 @@ export const likePost = async (dispatch, unique_id, accessToken) => {
     `http://192.168.20.107:8000/api/like/post/create/${unique_id}`,
     {method: 'POST', headers: {Authorization: `Bearer ${accessToken}`}},
   );
-  console.log(response)
+
 };
 
 
-export const fetchComments = async () => {
+export const fetchComments = async ( unique_id , accessToken , page , callback) => {
+    let data = await fetch(`http://192.168.20.107:8000/api/comment/list/${unique_id}?page=${page}` , {headers : {Authorization: `Bearer ${accessToken}`}})
+    if(data.ok){
+        data = await data.json();
+    callback(data)
+    }
     
+}
+
+
+export const likeComment = async (unique_id , accessToken , callback) => {
+    let response = await fetch(`http://192.168.20.107:8000/api/like/comment/create/${unique_id}` , {method: 'POST', headers: {Authorization: `Bearer ${accessToken}`}})
 }
