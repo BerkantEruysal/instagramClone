@@ -7,13 +7,14 @@ import {
   ImageBackground,
   TouchableOpacity,
 } from 'react-native';
-import React from 'react';
+import React , {useState} from 'react';
 import { useSelector , useDispatch } from 'react-redux';
 import { likePost } from '../api/PostsApi';
 import ProfileImage from './ProfileImage';
 import { resetCommentState } from '../redux/slices/Comments';
 
 export default function Post({navigation , props}) {
+
   const {accessToken} = useSelector(state => state.User)
   const dispatch = useDispatch();
   const openCommentScreen = () => {
@@ -22,6 +23,20 @@ export default function Post({navigation , props}) {
   }
   const likeHandler = () => {
     likePost(dispatch , props.unique_id , accessToken)
+  }
+
+//For "...More" button to work
+  const [title , setTitle] = useState(props.title.split("").slice(0 , 50).join(""))
+  const [isExtended , setIsExtended] = useState(false)
+  const moreButtonHandler = () => {
+    if(isExtended == false){
+      setTitle(props.title)
+      setIsExtended(true)
+      return
+    }
+    setTitle(props.title.split("").slice(0 , 50).join(""))
+    setIsExtended(false)
+    
   }
   
 
@@ -87,8 +102,8 @@ export default function Post({navigation , props}) {
         <View style={styles.postDescription}>
           <Text>
             <Text style={styles.userName}>{props.user.username} </Text>
-            <Text style={styles.normalText}>{props.title}</Text>
-            <Text>...more</Text>
+            <Text style={styles.normalText}>{title}</Text>
+            { props.title.length > 50 ? <TouchableOpacity  onPress={moreButtonHandler}><Text style={styles.moreButton}>{isExtended ? "show less" : "...more"}</Text></TouchableOpacity>  : <></> }
           </Text>
           <View style={styles.addComment}>
             <Image
@@ -172,4 +187,6 @@ const styles = StyleSheet.create({
     height: 24,
     marginRight: 10,
   },
+  moreButton : {
+  }
 });
