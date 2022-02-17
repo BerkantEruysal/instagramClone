@@ -10,6 +10,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import UserProfile from './UserProfile';
 import Footer from '../components/Footer';
 import Loading from './Loading';
+import Posts from "./Posts"
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -18,10 +19,18 @@ export default function Navigation() {
     const {isLoggedIn} = useSelector(state => state.User)
     const [isLoading , setIsLoading] = useState(true)
 
+    const ProfileStack = () => {
+      return <Stack.Navigator>
+        <Stack.Screen name='UserProfile' options={{headerShown: false}} component={UserProfile}></Stack.Screen>
+        <Stack.Screen name='Posts' component={Posts}></Stack.Screen>
+      </Stack.Navigator >
+    }
+
     const HomeStack = () => {
       return <Tab.Navigator tabBar={ props => <Footer {...props}> </Footer>}>
         <Tab.Screen name='Home' options={{headerShown: false}} component={Home}></Tab.Screen>
-        <Tab.Screen name='UserProfile' options={{headerShown: false}} component={UserProfile}></Tab.Screen>
+        <Tab.Screen name='UserProfile' options={{headerShown: false}} component={ProfileStack}></Tab.Screen>
+        
       </Tab.Navigator>
     }
   return (

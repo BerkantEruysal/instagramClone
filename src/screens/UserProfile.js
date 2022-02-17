@@ -166,8 +166,8 @@ const postData = [
   ],
   [
     {
-      id: 10,
-      userName: 'sojiner',
+      unique_id: 10,
+      username: 'sojiner',
       isLiked: true,
       profileImage: require('../assets/tempProfileIcon.png'),
       activeStory: true,
@@ -183,13 +183,14 @@ const postData = [
   ],
 ];
 
-export default function UserProfile() {
+export default function UserProfile({navigation}) {
+
   const renderMinimizedPosts = data => {
     return (
       <View  style={styles.minimizedPostRow}>
         {data.item.map(post => {
           return (
-            <TouchableOpacity key={post.id} style={styles.minimizedPost}>
+            <TouchableOpacity onPress={openPostHandler} key={post.id} style={styles.minimizedPost}>
               <Image
                 style={styles.minimizedPostImage}
                 source={post.postImage}></Image>
@@ -199,7 +200,6 @@ export default function UserProfile() {
       </View>
     );
   };
-
   const HeaderOfPostList = () => {
     return (
       <View>
@@ -233,6 +233,9 @@ export default function UserProfile() {
       </View>
     );
   };
+  const openPostHandler = (index) => {
+    navigation.navigate("Posts")
+  }
   return (
     <View style={styles.wrapper}>
       <View style={styles.header}>
