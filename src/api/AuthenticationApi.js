@@ -11,43 +11,51 @@ export const logIn = async (dispatch, {password, userName}) => {
       password,
       username: userName,
     }),
-  })
- 
+  });
+
   tokens = await tokens.json();
   dispatch(
-    setTokens({accessToken: tokens.access, refreshToken: tokens.refresh})
+    setTokens({accessToken: tokens.access, refreshToken: tokens.refresh}),
   );
-  setTokensToEncrypetStorage(tokens.access , tokens.refresh)
+  setTokensToEncrypetStorage(tokens.access, tokens.refresh);
 };
 
-export const getTokensFromEncryptedStorage = async (dispatch , setIsLoading) => {
-  try {   
-    let session = await EncryptedStorage.getItem("user_session");
-    session = JSON.parse(session)
+export const getTokensFromEncryptedStorage = async (dispatch, callback) => {
+  try {
+    let session = await EncryptedStorage.getItem('user_session');
+    session = JSON.parse(session);
     if (session.accessToken !== undefined) {
-      console.log("asd")
-      
-      dispatch(setTokens({accessToken : session.accessToken , refreshToken: session.refresh}))
-        
+      dispatch(
+        setTokens({
+          accessToken: session.accessToken,
+          refreshToken: session.refresh,
+        }),
+      );
+      callback(session.accessToken)
+      return
     }
-    setIsLoading(false)
-} catch (error) {
-    console.log(error)
-}
-}
+    callback()
+    
+  } catch (error) {
+  }
+  
+};
 
-export const setTokensToEncrypetStorage = async (access , refresh) => {
+export const setTokensToEncrypetStorage = async (access, refresh) => {
   try {
     await EncryptedStorage.setItem(
-        "user_session",
-        JSON.stringify({
-            accessToken : access,
-            refreshToken : refresh
-        })
+      'user_session',
+      JSON.stringify({
+        accessToken: access,
+        refreshToken: refresh,
+      }),
     );
+  } catch (error) {}
+};
 
-  
-} catch (error) {
-   
-}
+
+export const getCredentials = async (accessToken , callback) => {
+  let data = await fetch("http://192.168.20.107:8000/api/user/credentials/" , {headers : {Authorization: `Bearer ${accessToken}`}})
+  data = await data.json();
+  callback(data)
 }
