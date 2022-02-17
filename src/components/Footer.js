@@ -1,7 +1,9 @@
 import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 export default function Footer({state, descriptors, navigation}) {
+  const {profilePicture} = useSelector((data) => data.User)
   const navigateHandler = ScreenName => {
     navigation.navigate(ScreenName);
   };
@@ -40,7 +42,7 @@ export default function Footer({state, descriptors, navigation}) {
               ? [styles.profileIcon, styles.focusedIcon]
               : styles.profileIcon
           }
-          source={require('../assets/tempProfileIcon.png')}></Image>
+          source={{uri : profilePicture}}></Image>
       </TouchableOpacity>
     </View>
   );
