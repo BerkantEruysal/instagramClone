@@ -1,16 +1,34 @@
 import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
 import ProfileImage from './ProfileImage';
-import {useDispatch , useSelector} from 'react-redux';
-import {changeIsCommentLikedState} from '../redux/slices/Comments';
-import { likeComment } from '../api/PostsApi';
+import {useDispatch, useSelector} from 'react-redux';
+import {
+  changeIsCommentLikedState,
+  setUsernameOfReplyedComment,
+} from '../redux/slices/Comments';
+import {likeComment} from '../api/PostsApi';
+import {
+  setIdOfReplyedComment,
+  changeReplyButtonPressed,
+} from '../redux/slices/Comments';
 
 export default function Comment({props}) {
-  const {accessToken} = useSelector(state => state.User)
+  const {accessToken} = useSelector(state => state.User);
   const dispatch = useDispatch();
   const likeCommentHandler = () => {
-    dispatch(changeIsCommentLikedState(props.unique_id));
-    likeComment(props.unique_id , accessToken)
+    dispatch(changeIsCommentLikedState({unique_id : props.unique_id , parent_unique_id : props.parent_unique_id}));
+    likeComment(props.unique_id, accessToken);
+  };
+  const replyButtonHandler = () => {
+    dispatch(changeReplyButtonPressed());
+    dispatch(setUsernameOfReplyedComment(props.user.username));
+    if(props.parent_unique_id != null){
+      dispatch(setIdOfReplyedComment(props.parent_unique_id));
+      return
+    }
+    dispatch(setIdOfReplyedComment(props.unique_id))
+    
+    
   };
   return (
     <View style={styles.wrapper}>
@@ -21,6 +39,7 @@ export default function Comment({props}) {
           size={10}
           image={{uri: props.user.profilePicture}}></ProfileImage>
       </View>
+      <></>
       <View style={styles.commentTextWrapper}>
         <Text>
           <Text style={styles.userName}>{props.user.username} </Text>
@@ -37,7 +56,7 @@ export default function Comment({props}) {
               props.likeCount + ' like'
             )}
           </Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={replyButtonHandler}>
             <Text>Reply</Text>
           </TouchableOpacity>
         </View>
