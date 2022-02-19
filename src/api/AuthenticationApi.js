@@ -1,7 +1,7 @@
 import {setTokens} from '../redux/slices/User';
 import EncryptedStorage from 'react-native-encrypted-storage';
 
-export const logIn = async (dispatch, {password, userName}) => {
+export const logIn = async (dispatch, {password, userName} , callback) => {
   let tokens = await fetch('http://192.168.20.107:8000/api/token/', {
     headers: {
       'Content-Type': 'application/json',
@@ -18,6 +18,7 @@ export const logIn = async (dispatch, {password, userName}) => {
     setTokens({accessToken: tokens.access, refreshToken: tokens.refresh}),
   );
   setTokensToEncrypetStorage(tokens.access, tokens.refresh);
+  callback(tokens.access)
 };
 
 export const getTokensFromEncryptedStorage = async (dispatch, callback) => {

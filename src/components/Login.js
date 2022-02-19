@@ -9,11 +9,12 @@ import {
 } from 'react-native';
 import React, {useEffect, useRef, useState} from 'react';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import {logIn} from '../api/AuthenticationApi';
+import {getCredentials, logIn} from '../api/AuthenticationApi';
 import {useDispatch, useSelector} from 'react-redux';
 
 
 import { getHomePosts } from '../api/PostsApi';
+import { setCredentials } from '../redux/slices/User';
 
 export default function Login(props) {
   const [userName, setUserName] = useState('');
@@ -23,7 +24,14 @@ export default function Login(props) {
   
 
   const logInButtonHandler = () => {
-    logIn(dispatch, {userName, password});
+    logIn(dispatch, {userName, password} , (accessToken) => {
+    
+        getCredentials(accessToken , data => {
+    
+          dispatch(setCredentials(data))
+        })
+        
+    });
 
   
   };
