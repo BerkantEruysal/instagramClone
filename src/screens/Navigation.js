@@ -29,7 +29,7 @@ export default function Navigation() {
     const HomeStack = () => {
       return <Tab.Navigator tabBar={ props => <Footer {...props}> </Footer>}>
         <Tab.Screen name='Home' options={{headerShown: false}} component={Home}></Tab.Screen>
-        <Tab.Screen name='UserProfile' options={{headerShown: false}} component={ProfileStack}></Tab.Screen>
+        <Tab.Screen name='UserProfileStack' options={{headerShown: false}} component={ProfileStack}></Tab.Screen>
         
       </Tab.Navigator>
     }
