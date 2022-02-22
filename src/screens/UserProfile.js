@@ -11,192 +11,34 @@ import {
 import React from 'react';
 import UserFollowData from '../components/UserFollowData';
 import ProfileBio from '../components/ProfileBio';
-import Footer from "../components/Footer"
+import Footer from '../components/Footer';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { fetchProfilePosts } from '../api/ProfileApi';
+import { addToUserPostData } from '../redux/slices/Profile';
 
-const storyData = [
-  {id: 0, image: require('../assets/examplePostImage.png'), name: 'story name'},
-  {id: 1, image: require('../assets/examplePostImage.png'), name: 'tatil'},
-  {id: 2, image: require('../assets/examplePostImage.png'), name: 'okul'},
-  {id: 3, image: require('../assets/examplePostImage.png'), name: 'kedim'},
-  {id: 4, image: require('../assets/examplePostImage.png'), name: 'araba'},
-];
 
-const postData = [
-  [
-    {
-      id: 1,
-      userName: 'berkanteruysall',
-      isLiked: false,
-      profileImage: require('../assets/tempProfileIcon.png'),
-      activeStory: false,
-      postImage: require('../assets/examplePostImage.png'),
-      loggedUserProfileIcon: require('../assets/tempProfileIcon.png'),
-      numberOfLikes: 142,
-      postImageWidth: 375,
-      postImageHeight: 375,
-      timePassed: '10 minutes',
-      postDescription:
-        'Explanation Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt...',
-    },
-    {
-      id: 2,
-      userName: 'sojiner',
-      isLiked: true,
-      profileImage: require('../assets/tempProfileIcon.png'),
-      activeStory: true,
-      postImage: require('../assets/examplePostImage2.png'),
-      loggedUserProfileIcon: require('../assets/tempProfileIcon.png'),
-      postImageWidth: 375,
-      postImageHeight: 468.75,
-      timePassed: '3 hours',
-      numberOfLikes: 56,
-      postDescription:
-        'Explanation Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt...',
-    },
-    {
-      id: 3,
-      userName: 'berkanteruysall',
-      isLiked: false,
-      profileImage: require('../assets/tempProfileIcon.png'),
-      activeStory: false,
-      postImage: require('../assets/examplePostImage.png'),
-      loggedUserProfileIcon: require('../assets/tempProfileIcon.png'),
-      numberOfLikes: 142,
-      postImageWidth: 375,
-      postImageHeight: 375,
-      timePassed: '10 minutes',
-      postDescription:
-        'Explanation Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt...',
-    },
-  ],
-  [
-    {
-      id: 4,
-      userName: 'sojiner',
-      isLiked: true,
-      profileImage: require('../assets/tempProfileIcon.png'),
-      activeStory: true,
-      postImage: require('../assets/examplePostImage2.png'),
-      loggedUserProfileIcon: require('../assets/tempProfileIcon.png'),
-      postImageWidth: 375,
-      postImageHeight: 468.75,
-      timePassed: '3 hours',
-      numberOfLikes: 56,
-      postDescription:
-        'Explanation Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt...',
-    },
-    {
-      id: 5,
-      userName: 'berkanteruysall',
-      isLiked: false,
-      profileImage: require('../assets/tempProfileIcon.png'),
-      activeStory: false,
-      postImage: require('../assets/examplePostImage.png'),
-      loggedUserProfileIcon: require('../assets/tempProfileIcon.png'),
-      numberOfLikes: 142,
-      postImageWidth: 375,
-      postImageHeight: 375,
-      timePassed: '10 minutes',
-      postDescription:
-        'Explanation Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt...',
-    },
-    {
-      id: 6,
-      userName: 'sojiner',
-      isLiked: true,
-      profileImage: require('../assets/tempProfileIcon.png'),
-      activeStory: true,
-      postImage: require('../assets/examplePostImage2.png'),
-      loggedUserProfileIcon: require('../assets/tempProfileIcon.png'),
-      postImageWidth: 375,
-      postImageHeight: 468.75,
-      timePassed: '3 hours',
-      numberOfLikes: 56,
-      postDescription:
-        'Explanation Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt...',
-    },
-  ],
-
-  [
-    {
-      id: 7,
-      userName: 'berkanteruysall',
-      isLiked: false,
-      profileImage: require('../assets/tempProfileIcon.png'),
-      activeStory: false,
-      postImage: require('../assets/examplePostImage.png'),
-      loggedUserProfileIcon: require('../assets/tempProfileIcon.png'),
-      numberOfLikes: 142,
-      postImageWidth: 375,
-      postImageHeight: 375,
-      timePassed: '10 minutes',
-      postDescription:
-        'Explanation Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt...',
-    },
-    {
-      id: 8,
-      userName: 'sojiner',
-      isLiked: true,
-      profileImage: require('../assets/tempProfileIcon.png'),
-      activeStory: true,
-      postImage: require('../assets/examplePostImage2.png'),
-      loggedUserProfileIcon: require('../assets/tempProfileIcon.png'),
-      postImageWidth: 375,
-      postImageHeight: 468.75,
-      timePassed: '3 hours',
-      numberOfLikes: 56,
-      postDescription:
-        'Explanation Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt...',
-    },
-    {
-      id: 9,
-      userName: 'berkanteruysall',
-      isLiked: false,
-      profileImage: require('../assets/tempProfileIcon.png'),
-      activeStory: false,
-      postImage: require('../assets/examplePostImage.png'),
-      loggedUserProfileIcon: require('../assets/tempProfileIcon.png'),
-      numberOfLikes: 142,
-      postImageWidth: 375,
-      postImageHeight: 375,
-      timePassed: '10 minutes',
-      postDescription:
-        'Explanation Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt...',
-    },
-  ],
-  [
-    {
-      unique_id: 10,
-      username: 'sojiner',
-      isLiked: true,
-      profileImage: require('../assets/tempProfileIcon.png'),
-      activeStory: true,
-      postImage: require('../assets/examplePostImage2.png'),
-      loggedUserProfileIcon: require('../assets/tempProfileIcon.png'),
-      postImageWidth: 375,
-      postImageHeight: 468.75,
-      timePassed: '3 hours',
-      numberOfLikes: 56,
-      postDescription:
-        'Explanation Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt...',
-    },
-  ],
-];
 
 export default function UserProfile({navigation}) {
-
+  const dispatch = useDispatch()
+  useEffect(() => {
+    fetchProfilePosts({accessToken , username } , (data) => {
+     dispatch(addToUserPostData(data)) 
+    })
+  } , [])
+  const {storyData , postData} = useSelector(state => state.Profile)
+  const {accessToken , username} = useSelector(state => state.User)
   const renderMinimizedPosts = data => {
     return (
-      <View  style={styles.minimizedPostRow}>
-        {data.item.map(post => {
-          return (
-            <TouchableOpacity onPress={openPostHandler} key={post.id} style={styles.minimizedPost}>
-              <Image
-                style={styles.minimizedPostImage}
-                source={post.postImage}></Image>
-            </TouchableOpacity>
-          );
-        })}
+      <View>
+        <TouchableOpacity onPress={() => {
+              openPostHandler(data.index);
+            }} style={styles.minimizedPost}>
+          <Image
+            style={styles.minimizedPostImage}
+            source={{uri : data.item.images}}
+            ></Image>
+        </TouchableOpacity>
       </View>
     );
   };
@@ -233,9 +75,9 @@ export default function UserProfile({navigation}) {
       </View>
     );
   };
-  const openPostHandler = (index) => {
-    navigation.navigate("Posts")
-  }
+  const openPostHandler = index => {
+    navigation.navigate('Posts' , {index});
+  };
   return (
     <View style={styles.wrapper}>
       <View style={styles.header}>
@@ -264,8 +106,10 @@ export default function UserProfile({navigation}) {
         ListHeaderComponent={HeaderOfPostList}
         style={styles.postList}
         data={postData}
+        numColumns={3}
+        keyExtractor={item => item.id}
+        columnWrapperStyle={styles.minimizedPostRow}
         renderItem={renderMinimizedPosts}></FlatList>
-       
     </View>
   );
 }
@@ -355,8 +199,8 @@ const styles = StyleSheet.create({
     height: 17,
   },
   minimizedPost: {
-    width: vw(33.),
-    height: vw(33.),
+    width: vw(33),
+    height: vw(33),
   },
   minimizedPostImage: {
     width: '100%',
@@ -364,8 +208,8 @@ const styles = StyleSheet.create({
   },
   minimizedPostRow: {
     flexDirection: 'row',
-    justifyContent : "space-between",
-    paddingBottom : 1
+    justifyContent: 'space-between',
+    paddingBottom: 1,
   },
   postList: {
     height: '93%',
