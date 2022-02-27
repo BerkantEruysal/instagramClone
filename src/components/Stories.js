@@ -5,43 +5,43 @@ import Story from './Story';
 const DATA = [
   {
     image: require('../assets/tempProfileIcon.png'),
-    userName: 'berkant',
+    userName: 'brktrll.z',
     isWatched: false,
   },
   {
-    image: require('../assets/tempProfileIcon.png'),
-    userName: 'asdasd',
+    image: require('../assets/tempProfileIcon2.png'),
+    userName: 'BerkantEruysall',
     isWatched: false,
   },
   {
-    image: require('../assets/tempProfileIcon.png'),
-    userName: 'berkant',
+    image: require('../assets/tempProfileIcon3.png'),
+    userName: 'CemYılmaz',
     isWatched: false,
   },
   {
     
-    image: require('../assets/tempProfileIcon.png'),
-    userName: 'asdasd',
+    image: require('../assets/tempProfileIcon4.png'),
+    userName: 'ScrorpionLover',
     isWatched: false,
   },
   {
-    image: require('../assets/tempProfileIcon.png'),
-    userName: 'berkant',
+    image: require('../assets/tempProfileIcon5.png'),
+    userName: 'Komikli',
     isWatched: false,
   },
   {
-    image: require('../assets/tempProfileIcon.png'),
-    userName: 'asdasd',
+    image: require('../assets/tempProfileIcon6.png'),
+    userName: 'excalibur17',
     isWatched: true,
   },
   {
-    image: require('../assets/tempProfileIcon.png'),
-    userName: 'berkant',
+    image: require('../assets/tempProfileIcon7.png'),
+    userName: 'nebuchadnezzar',
     isWatched: true,
   },
   {
-    image: require('../assets/tempProfileIcon.png'),
-    userName: 'asdasd',
+    image: require('../assets/tempProfileIcon8.png'),
+    userName: 'havuç',
     isWatched: true,
   }
   
