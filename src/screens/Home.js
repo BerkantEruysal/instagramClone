@@ -7,7 +7,7 @@ import Stories from '../components/Stories';
 
 export default function Home({navigation}) {
   return (
-    <View>
+    <View style={{flex : 1}}>
       <HomeHeader></HomeHeader>
       <MainContent navigation={navigation} header={Stories}></MainContent>
       
