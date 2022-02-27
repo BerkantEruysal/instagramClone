@@ -36,7 +36,7 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-This is a clone application project of Instagram that aims to develop using the technologies that Instagram uses. \
+This is a clone application project of Instagram that aimed to be developed using the technologies that Instagram uses. \
 We tried to add as much detail as we could, from security to user experience.
 
 Back-end repository of this project can be reached from [here](https://github.com/Brktrlw/Instagram-Clone-Django-and-React)
